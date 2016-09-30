@@ -57,6 +57,7 @@ Stack parse_stack( char *infile );
 int process_infile( dmBlock *inBlock, Filter *filters, Parameters *pars );
 int do_filters( dmBlock *inBlock, Filter *filters, Parameters *pars );
 int do_outfiles( dmBlock *inBlock, Filter *filters, Parameters *pars );
+int cleanup(Filter *filters, Parameters *pars );
 
 /* -----  Code ------------------------------*/
 
@@ -272,6 +273,14 @@ int process_infile( dmBlock *inBlock, Filter *filters, Parameters *pars )
     dmFree(row);
 
 
+    return(0);
+}
+
+/*
+ * Cleanup inputs/memory
+ */
+int cleanup(Filter *filters, Parameters *pars )
+{
     /* Close output files -- use TableClose() to close block and dataset */
     long jj;
     for (jj=0;jj<pars->num_filters;jj++) {            
@@ -281,8 +290,13 @@ int process_infile( dmBlock *inBlock, Filter *filters, Parameters *pars )
         free( filters[jj].filter );
     }
 
+    /* Free remaining memory */
+    stk_close( pars->filter_stack);
+    stk_close( pars->outfile_stack);
+
     return(0);
 }
+
 
 
 /* main routine */
@@ -306,10 +320,8 @@ int dmscopy(void)
 
     process_infile( inBlock, filters, pars );
 
-    /* Free remaining memory */
-    dmTableClose( inBlock );
-    stk_close( pars->filter_stack);
-    stk_close( pars->outfile_stack);
+    cleanup( filters, pars );
+    dmTableClose(inBlock);
     free(pars);
     free(filters);
 
