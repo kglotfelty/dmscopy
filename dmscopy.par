@@ -1,0 +1,6 @@
+infile,f,a,"",,,"Input table file name"
+filters,s,a,"",,,"Stack of DM filters"
+outfile,f,a,"",,,"Stack of output file names"
+clobber,b,h,yes,,,"Clobber existing files"
+verbose,i,h,0,0,5,"Tool verbosity"
+mode,s,h,"ql",,,
