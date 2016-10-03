@@ -70,7 +70,7 @@ Stack parse_stack( char *infile )
     
     out_stack = stk_build( infile);
     if ( NULL == out_stack ) {
-        err_msg("ERROR: Unable to parse filter stack");
+        err_msg("ERROR: Unable to parse stack '%s'",infile);
         return(NULL);
     }
     if ( (0 == strlen( infile)  ) ||
