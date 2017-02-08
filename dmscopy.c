@@ -21,45 +21,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "ascdm.h"
-#include "dslib.h"
-#include "stack.h"
-#include "histlib.h"
+#include "dmscopy.h"
 
-#define I_AM "dmscopy"
-
-typedef struct {
-    char infile[DS_SZ_PATHNAME];
-    char filters[DS_SZ_PATHNAME];
-    char outfile[DS_SZ_PATHNAME];
-    int clobber;
-    int verbose;
-    Stack filter_stack;
-    Stack outfile_stack;    
-    long num_filters;
-} Parameters;
-
-
-typedef struct {
-    char *filter;
-    char *outfile;    
-    dmRowFilter *dm_filter;
-    dmBlock *out_block;
-} Filter;
-
-
-/* ---  Prototypes  --------------------------------*/
-
-int dmscopy(void);
-Filter* setup_filters( dmBlock *inBlock, Parameters *pars);
-Parameters* get_inputs(void);
-Stack parse_stack( char *infile );
-int process_infile( dmBlock *inBlock, Filter *filters, Parameters *pars );
-int do_filters( dmBlock *inBlock, Filter *filters, Parameters *pars );
-int do_outfiles( dmBlock *inBlock, Filter *filters, Parameters *pars );
-int cleanup(Filter *filters, Parameters *pars );
-
-/* -----  Code ------------------------------*/
 
 /* Process the input stacks.  Check that stk build works, and that stack
  * is not empty
@@ -79,7 +42,7 @@ Stack parse_stack( char *infile )
              err_msg("ERROR: stack '%s' cannot be empty", infile);
              return(NULL);
     }
-    stk_rewind( out_stack);
+    stk_rewind(out_stack);
     
     return(out_stack);
 }

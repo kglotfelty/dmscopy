@@ -18,36 +18,41 @@
 /*  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.             */
 /*                                                                          */
 
+#include "ascdm.h"
+#include "dslib.h"
+#include "stack.h"
+#include "histlib.h"
+
+#define I_AM "dmscopy"
+
+typedef struct {
+    char infile[DS_SZ_PATHNAME];
+    char filters[DS_SZ_PATHNAME];
+    char outfile[DS_SZ_PATHNAME];
+    int clobber;
+    int verbose;
+    Stack filter_stack;
+    Stack outfile_stack;    
+    long num_filters;
+} Parameters;
 
 
-#include "dmscopy.h"
+typedef struct {
+    char *filter;
+    char *outfile;    
+    dmRowFilter *dm_filter;
+    dmBlock *out_block;
+} Filter;
 
 
-int main(int argc, char** argv)
-{
-    int fail_status = 0; 
+/* ---  Prototypes  --------------------------------*/
 
+int dmscopy(void);
+Filter* setup_filters( dmBlock *inBlock, Parameters *pars);
+Parameters* get_inputs(void);
+Stack parse_stack( char *infile );
+int process_infile( dmBlock *inBlock, Filter *filters, Parameters *pars );
+int do_filters( dmBlock *inBlock, Filter *filters, Parameters *pars );
+int do_outfiles( dmBlock *inBlock, Filter *filters, Parameters *pars );
+int cleanup(Filter *filters, Parameters *pars );
 
-    dsErrInitLib(dsPTGRPERR, I_AM);
-
-    /* INIT THE IRAF ENVIRONMENT */
-    /* IRAFHOST_INIT;		*/
-
-    /* OPEN THE PARAMETER FILE */
-    if(clinit(argv, argc, "rw") == NULL)
-    {
-       err_msg( "Problem opening parameter file %s.par\n", argv[0]);
-       err_msg( "Parameter library error: %s.\n", paramerrstr());
-       fail_status = -1;
-    }
-    else
-    {    
-       /* EXECUTE OUR PROGRAM */ 
-       fail_status = dmscopy();
-    
-       /* CLOSE PARAMETER FILE AND RETURN TO THE OS */
-       clclose();
-    } 
-    
-    exit(fail_status); 
-}
