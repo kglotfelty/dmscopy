@@ -1,6 +1,6 @@
 
 #MK_TOP = ../../../..
-MK_TOP = /export/ciao_from_source/ciao-4.8/src
+MK_TOP = /export/ciao_from_source/ciao-4.9/src
 KJG = /export/ciao
 
 include $(MK_TOP)/Makefile.master
@@ -40,5 +40,5 @@ kjg: $(EXEC)
 
 announce1:
 	@echo "   /----------------------------------------------------------\ "
-	@echo "   |             Building paddy DM host tool         | "
+	@echo "   |             Building dmscopy DM host tool         | "
 	@echo "   \----------------------------------------------------------/ "
