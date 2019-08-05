@@ -1,4 +1,4 @@
-AC_INIT([mytool], [1.0.0], [glotfeltyk@si.edu])
+AC_INIT([dmscopy], [1.0.0], [glotfeltyk@si.edu])
 AM_INIT_AUTOMAKE([foreign -Wall])
 AC_PROG_CC
 AM_PROG_CC_C_O
@@ -66,13 +66,6 @@ PKG_CHECK_MODULES( [CIAO], [
   ds
 ])
 
-# -------- dmimgio.h ------------
-foo=$CPPFLAGS
-CPPFLAGS=$CIAO_CFLAGS
-AC_CHECK_HEADER( dmimgio.h, [], 
-  AC_MSG_ERROR([Cannot locate dmimgio.h header file], [1])
-)
-CPPFLAGS=$foo
 
 
 # ------------
@@ -89,7 +82,7 @@ AC_CONFIG_FILES([
   test/Makefile
 ])
 
-AC_CONFIG_FILES([wrapper/mytool:wrapper/wrapper.sh],[chmod +x wrapper/mytool])
+AC_CONFIG_FILES([wrapper/dmscopy:wrapper/wrapper.sh],[chmod +x wrapper/dmscopy])
 
 # -- Go! -----------
 

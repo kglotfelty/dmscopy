@@ -1,5 +1,6 @@
 # make sure test script is exec
-TESTS = mytool.t
+
+###TESTS = dmscopy.t
 
 TESTS_ENVIRONMENT =\
 TESTIN=indata; \
