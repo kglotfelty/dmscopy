@@ -50,7 +50,8 @@ CONFIG_CLEAN_VPATH_FILES =
 am__EXEEXT_1 = dmscopy$(EXEEXT)
 am__installdirs = "$(DESTDIR)$(binexedir)" "$(DESTDIR)$(paramdir)"
 PROGRAMS = $(binexe_PROGRAMS)
-am_dmscopy_OBJECTS = dmscopy-dmscopy.$(OBJEXT)
+am_dmscopy_OBJECTS = dmscopy-dmscopy.$(OBJEXT) \
+	dmscopy-t_dmscopy.$(OBJEXT)
 dmscopy_OBJECTS = $(am_dmscopy_OBJECTS)
 am__DEPENDENCIES_1 =
 dmscopy_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
@@ -183,7 +184,7 @@ tool = dmscopy
 binexedir = $(prefix)/binexe
 paramdir = $(prefix)/param
 ahelpdir = $(prefix)/share/doc/xml
-dmscopy_SOURCES = dmscopy.c
+dmscopy_SOURCES = dmscopy.c t_dmscopy.c
 dmscopy_CPPFLAGS = $(CIAO_CFLAGS)
 dmscopy_LDADD = $(CIAO_LIBS) $(am__append_1)
 dmscopy_LINK = $(CXX) -o $@ -Wl,-rpath,$(prefix)/lib -Wl,-rpath,$(prefix)/ots/lib 
@@ -270,6 +271,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dmscopy-dmscopy.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dmscopy-t_dmscopy.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -298,6 +300,20 @@ dmscopy-dmscopy.obj: dmscopy.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='dmscopy.c' object='dmscopy-dmscopy.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dmscopy_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dmscopy-dmscopy.obj `if test -f 'dmscopy.c'; then $(CYGPATH_W) 'dmscopy.c'; else $(CYGPATH_W) '$(srcdir)/dmscopy.c'; fi`
+
+dmscopy-t_dmscopy.o: t_dmscopy.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dmscopy_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dmscopy-t_dmscopy.o -MD -MP -MF $(DEPDIR)/dmscopy-t_dmscopy.Tpo -c -o dmscopy-t_dmscopy.o `test -f 't_dmscopy.c' || echo '$(srcdir)/'`t_dmscopy.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/dmscopy-t_dmscopy.Tpo $(DEPDIR)/dmscopy-t_dmscopy.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='t_dmscopy.c' object='dmscopy-t_dmscopy.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dmscopy_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dmscopy-t_dmscopy.o `test -f 't_dmscopy.c' || echo '$(srcdir)/'`t_dmscopy.c
+
+dmscopy-t_dmscopy.obj: t_dmscopy.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dmscopy_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dmscopy-t_dmscopy.obj -MD -MP -MF $(DEPDIR)/dmscopy-t_dmscopy.Tpo -c -o dmscopy-t_dmscopy.obj `if test -f 't_dmscopy.c'; then $(CYGPATH_W) 't_dmscopy.c'; else $(CYGPATH_W) '$(srcdir)/t_dmscopy.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/dmscopy-t_dmscopy.Tpo $(DEPDIR)/dmscopy-t_dmscopy.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='t_dmscopy.c' object='dmscopy-t_dmscopy.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dmscopy_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dmscopy-t_dmscopy.obj `if test -f 't_dmscopy.c'; then $(CYGPATH_W) 't_dmscopy.c'; else $(CYGPATH_W) '$(srcdir)/t_dmscopy.c'; fi`
 install-dist_paramDATA: $(dist_param_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(paramdir)" || $(MKDIR_P) "$(DESTDIR)$(paramdir)"

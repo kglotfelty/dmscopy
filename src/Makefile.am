@@ -6,7 +6,7 @@ ahelpdir = $(prefix)/share/doc/xml
 
 binexe_PROGRAMS = $(tool)
 
-dmscopy_SOURCES = dmscopy.c
+dmscopy_SOURCES = dmscopy.c t_dmscopy.c
 dmscopy_CPPFLAGS = $(CIAO_CFLAGS)
 dmscopy_LDADD = $(CIAO_LIBS) 
 dmscopy_LINK = $(CXX) -o $@ -Wl,-rpath,$(prefix)/lib -Wl,-rpath,$(prefix)/ots/lib 
